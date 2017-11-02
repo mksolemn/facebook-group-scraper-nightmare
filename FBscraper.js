@@ -1,5 +1,6 @@
 const   Credentials = require('./credentials'), // Include our credentials
         Nightmare = require('nightmare'),
+        vo = require('vo'),
         nightmare = Nightmare({ show: true }),
         domain = 'https://facebook.com',      // Initial navigation domain
         groups = ['https://www.facebook.com/groups/394556737385005/?sorting_setting=RECENT_ACTIVITY', // Scrapable group array
