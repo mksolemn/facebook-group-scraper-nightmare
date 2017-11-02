@@ -1,5 +1,5 @@
 # Nightmarish facebook to wordpress scraper
-Facebook rental group scraping and resposting to wordpress. Using wordpress REST api, nodeJs, Angular4, NightmareJs, advanced custom field and advanced custom fields API.
+Facebook  group scraping using NodeJs and NightmareJs.
 
 
 ## 1. Basic NightmareJS setup
@@ -10,7 +10,7 @@ npm install --save nightmare
 
 ```
 
-## 2. Login to Facebook with NightmareJs
+## 2. Login to Facebook
 
 
 ### Setup external file to keep all your credentials
@@ -51,11 +51,13 @@ const   Credentials = require('./credentials'), // Include our credentials
             .type('input[id="email"]', Credentials.facebook_username)
             .type('input[id="pass"]', Credentials.facebook_password)
             .click('#loginbutton>input')
-            .wait(3000)
-            .then(console.log('done'))
+            .wait(3000) // will wait 3 seconds before closing Nightmare headless browser
+            .end()
             .catch((error) => {
                 console.error('Something went wrong:', error)
         });
 ```
+
+## 3. Looping through group pages
 
 

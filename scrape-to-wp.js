@@ -1,4 +1,4 @@
-const   Credentials = require('./credentials'),
+const   Credentials = require('./credentials'), // Include our credentials
         Nightmare = require('nightmare'),
         nightmare = Nightmare({ show: true }),
         domain = 'https://facebook.com',      // Initial navigation domain
@@ -8,7 +8,7 @@ const   Credentials = require('./credentials'),
         // add console logging - makes life a bit easier
         nightmare
             .on('console', (log, msg) => {console.log(msg); console.log( Credentials.facebook_username );})
-            .useragent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36")
+            .useragent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36") // browser info - not essential
             .goto(domain)
             .type('input[id="email"]', Credentials.facebook_username)
             .type('input[id="pass"]', Credentials.facebook_password)
