@@ -10,7 +10,7 @@ npm install --save nightmare
 
 ```
 
-## 2. Login to Facebook
+## 2. Login to Facebook with NightmareJS
 
 
 ### Setup external file to keep all your credentials
@@ -36,6 +36,8 @@ module.exports = {
 Totally basic setup, just to see how it works, will do some refactoring later.
 
 ```javascript
+// FBscraper.js
+
 const   Credentials = require('./credentials'), // Include our credentials
         Nightmare = require('nightmare'),
         nightmare = Nightmare({ show: true }),
@@ -58,6 +60,73 @@ const   Credentials = require('./credentials'), // Include our credentials
         });
 ```
 
-## 3. Looping through group pages
+## 3. Looping through group pages with vo.js and NightmareJS
+For this you will need external library vo.js
 
+```
+npm install --save vo
+```
 
+Once we login to facebook, we will loop through our groups. We achieve this using yield generator, which allows us to run asynchronous javascript synchronously.
+
+```javascript
+// FBscraper.js
+
+ .then(() => {
+
+     var run = function*() {
+         for (var i = 0; groups.length > i; i++) {
+             var post = yield nightmare.goto(groups[i])
+                 .wait(3000)
+                 .then(function() {
+                     console.log('Done yielding');
+                 })
+         }
+     }
+
+     vo(run)((res) => {
+         console.log(res);
+     })
+
+ })
+
+```
+
+## 4. Scraping data with NightmareJS and jQuery
+Make sure to install jQuery.
+
+```
+npm install --save jquery
+```
+
+jQuery must be injected into every page you navigate to.
+Lastly we select the field we want to scrape.
+
+```javascript
+// FBscraper.js
+
+.evaluate(() => {
+    var posts = [];
+    $('.fbUserStory').each(function(index) {
+        var post = {};
+        var userName = $(this).find('h5 a').text();
+        var price = $(this).find('._l57').text();
+        var postDate = $(this).find('abbr').attr('title');
+        var postTitle = $(this).find('._l53>span:last-child').text();
+        var location = $(this).find('.mtm ._l58').text();
+        var description = $(this).find('.userContent p').text();
+        post.id = index;
+        post.price = price;
+        post.username = userName;
+        post.date = postDate;
+        post.title = postTitle;
+        post.location = location;
+        post.description = description;
+        posts.push(post);
+    }) return posts;
+})
+
+```
+
+Coming up..... 11/09/2017
+Posting data to Wordpress using NightmareJS
