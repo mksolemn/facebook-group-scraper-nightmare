@@ -23,7 +23,26 @@ const   Credentials = require('./credentials'), // Include our credentials
                             .inject('js', './node_modules/jquery/dist/jquery.js') // injecting jQuery into the page
                             .wait(3000)
                             .evaluate(()=> {
+                                var posts = [];
+                                $('._5pcr').each(function(index){
+                                    var post = {};
+                                    var userName = $(this).find('h5 a').text();
+                                    var price = $(this).find('._l57').text();
+                                    var postDate = $(this).find('abbr').attr('title');
+                                    var postTitle = $(this).find('._l53>span:last-child').text();
+                                    var location = $(this).find('.mtm ._l58').text();
+                                    var description = $(this).find('.userContent p').text();
 
+                                    post.id = index;
+                                    post.price = price;
+                                    post.username = userName;
+                                    post.date = postDate;
+                                    post.title = postTitle;
+                                    post.location = location;
+                                    post.description = description;
+                                    posts.push(post);
+                                })
+                                return posts;
                             })
                             .then(function (posts) {
                                 console.log(posts);
