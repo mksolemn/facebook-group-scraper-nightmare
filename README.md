@@ -100,7 +100,9 @@ npm install --save jquery
 ```
 
 jQuery must be injected into every page you navigate to.
-Lastly we select the field we want to scrape.
+Lastly we select the field we want to scrape. Here only important part is evaluate, the rest is entirely up to you,
+keep in mind that facebook elements/wrappers may be different now and code inside evaluate function won't work.
+But have no fear, just inspect any element and get any value from it.
 
 ```javascript
 // FBscraper.js
@@ -109,19 +111,8 @@ Lastly we select the field we want to scrape.
     var posts = [];
     $('.fbUserStory').each(function(index) {
         var post = {};
-        var userName = $(this).find('h5 a').text();
-        var price = $(this).find('._l57').text();
-        var postDate = $(this).find('abbr').attr('title');
         var postTitle = $(this).find('._l53>span:last-child').text();
-        var location = $(this).find('.mtm ._l58').text();
-        var description = $(this).find('.userContent p').text();
-        post.id = index;
-        post.price = price;
-        post.username = userName;
-        post.date = postDate;
         post.title = postTitle;
-        post.location = location;
-        post.description = description;
         posts.push(post);
     }) return posts;
 })
@@ -130,3 +121,4 @@ Lastly we select the field we want to scrape.
 
 Coming up..... 11/09/2017
 Posting data to Wordpress using NightmareJS
+Any indication of interest in further tutorials is valued.
