@@ -1,6 +1,16 @@
 # Nightmarish facebook to wordpress scraper
 Facebook  group scraping using NodeJs and NightmareJs.
 
+Quick Setup
+```
+
+npm install
+
+```
+
+and
+
+Input your facebook credentials in credentialss.js
 
 ## 1. Basic NightmareJS setup
 
