@@ -2,3 +2,4 @@ node_modules
 credentials.js
 FBscraper.js
 .idea/
+tests/

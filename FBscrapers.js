@@ -53,11 +53,11 @@ nightmare
                     })
             }
         }
-
+        // setInterval(() => {
         vo(run)((res) => {
             console.log(res);
         })
-
+        // }, 1800000)
     })
     .catch((error) => {
         console.error('Something went wrong:', error)
